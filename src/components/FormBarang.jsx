@@ -201,7 +201,7 @@ const FormBarang = () => {
     };
 
     return (
-        <div className='w-[30rem] relative'>
+        <div className='w-[20rem] md:w-[30rem] relative'>
             <Toaster />
             <h2 className="text-[15px] font-bold mb-4">Tambah Barang</h2>
             {serverErrors && <p className="text-red-500 text-[14px]">{serverErrors}</p>}
