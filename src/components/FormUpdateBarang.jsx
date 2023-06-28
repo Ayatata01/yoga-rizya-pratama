@@ -6,18 +6,18 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from "react-redux";
 import { setBarangAction } from '../reducers/actions';
 
-const FormBarang = () => {
+const FormUpdateBarang = ({ barang, close }) => {
     const fileInputRef = useRef(null);
     const dispatch = useDispatch();
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(`https://cloudy-celestial-mojoceratops.glitch.me/${barang.foto_barang}`);
     const [loading, setLoading] = useState(false);
     const [serverErrors, setServerErrors] = useState();
     const [formData, setFormData] = useState({
-        nama_barang: '',
-        harga_beli: 0,
-        harga_jual: 0,
-        stok: 0,
-        image: null,
+        nama_barang: barang.nama_barang,
+        harga_beli: barang.harga_beli,
+        harga_jual: barang.harga_jual,
+        stok: barang.stok,
+        image: '',
     });
     const [errors, setErrors] = useState({
         nama_barang: '',
@@ -26,7 +26,6 @@ const FormBarang = () => {
         stok: '',
         image: '',
     });
-
     const token = Cookies.get('token');
 
     const handleButtonClick = (e) => {
@@ -105,15 +104,6 @@ const FormBarang = () => {
         }
 
 
-        if (!image) {
-            setErrors((prevErrors) => ({
-                ...prevErrors,
-                image: 'Foto harus diisi.',
-            }));
-            isValid = false;
-        }
-
-
         if (isNaN(Number(harga_beli))) {
             setErrors((prevErrors) => ({
                 ...prevErrors,
@@ -172,7 +162,7 @@ const FormBarang = () => {
             postData.append('image', formData.image);
 
             axios
-                .post('https://cloudy-celestial-mojoceratops.glitch.me/barang', postData, {
+                .patch(`https://cloudy-celestial-mojoceratops.glitch.me/barang/${barang._id}`, postData, {
                     headers: {
                         Authorization: `bearer ${token}`
                     }
@@ -188,8 +178,9 @@ const FormBarang = () => {
                     });
                     setSelectedImage(null);
                     setLoading(false);
-                    toast.success('Barang berhasil ditambahkan!');
+                    toast.success('Barang berhasil dirubah!');
                     fetchData();
+                    close();
                 })
                 .catch((error) => {
                     const err = error.response.data;
@@ -203,7 +194,7 @@ const FormBarang = () => {
     return (
         <div className='w-[30rem] relative'>
             <Toaster />
-            <h2 className="text-[15px] font-bold mb-4">Tambah Barang</h2>
+            <h2 className="text-[15px] font-bold mb-4">Edit Barang</h2>
             {serverErrors && <p className="text-red-500 text-[14px]">{serverErrors}</p>}
             <form onSubmit={handleSubmit}>
                 <Input title={'Nama barang'} name={'nama_barang'} type={'text'} change={(e) => handleInputChange(e)} value={formData.nama_barang} />
@@ -235,4 +226,4 @@ const FormBarang = () => {
     )
 }
 
-export default FormBarang
+export default FormUpdateBarang

@@ -43,11 +43,10 @@ const Home = () => {
         fetchData()
     }, [pages])
 
-    console.log('barangs :', barangs)
     return (
         <div className='container xl:max-w-screen-xl mx-auto py-12 px-6 font-poppins min-h-screen relative'>
             {/* create search and add barang */}
-            <div className='flex flex-row justify-between items-center'>
+            <div className='flex flex-col gap-6 md:gap-0 md:flex-row justify-between items-center'>
                 <AddButton click={openModal} />
                 <Modal isOpen={isOpen} onClose={closeModal}>
                     <FormBarang />

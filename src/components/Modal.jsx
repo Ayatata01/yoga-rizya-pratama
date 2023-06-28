@@ -6,8 +6,8 @@ const Modal = ({ isOpen, onClose, children }) => {
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-10 ">
-            <div className="fixed inset-0 bg-black opacity-50 z-[-3]"></div>
+        <div className="fixed inset-0 flex items-center justify-center z-10">
+            <div onClick={onClose} className="fixed inset-0 bg-black opacity-50 z-[-3]"></div>
             <div className="bg-white rounded-lg shadow-lg p-4 relative animate-scale-up overflow-y-auto max-h-screen">
                 <button
                     className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"

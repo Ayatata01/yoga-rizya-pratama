@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { useDispatch } from "react-redux";
 import { setBarangAction } from '../reducers/actions';
 import toast, { Toaster } from 'react-hot-toast';
+import FormUpdateBarang from './FormUpdateBarang';
 
 function formatMoney(number) {
     const factor = 1000;
@@ -27,6 +28,7 @@ function capitalizeFirstLetter(str) {
 const BarangCard = ({ barang }) => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenForm, setIsOpenForm] = useState(false);
     const [Loading, setLoading] = useState(false);
 
     const openModal = () => {
@@ -35,6 +37,14 @@ const BarangCard = ({ barang }) => {
 
     const closeModal = () => {
         setIsOpen(false);
+    };
+
+    const openModalForm = () => {
+        setIsOpenForm(true);
+    };
+
+    const closeModalForm = () => {
+        setIsOpenForm(false);
     };
 
     const fetchData = async () => {
@@ -110,7 +120,10 @@ const BarangCard = ({ barang }) => {
                                 </div>
                             </div>
                         </Modal>
-                        <PencilSquareIcon className='w-5 h-5 text-[#3C37FF] cursor-pointer' />
+                        <PencilSquareIcon onClick={openModalForm} className='w-5 h-5 text-[#3C37FF] cursor-pointer' />
+                        <Modal isOpen={isOpenForm} onClose={closeModalForm}>
+                            <FormUpdateBarang barang={barang} close={() => closeModalForm()} />
+                        </Modal>
                     </div>
                 </div>
             </div>

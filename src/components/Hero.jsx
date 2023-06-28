@@ -22,7 +22,7 @@ const Hero = () => {
             </div>
             <div className='bg-[#2520E3] mt-10 md:mt-[10rem] p-6 rounded-2xl flex flex-col'>
                 <p className='text-[15px]'>Dokumentasi api postman dapat dilihat dengan mengklik tombol dibawah!</p>
-                <a className='bg-[#3C37FF] p-3 w-fit mt-6 rounded-md hover:bg-[#2c25f1] text-[12px] duration-200' href="">Dokumentasi</a>
+                <a className='bg-[#3C37FF] p-3 w-fit mt-6 rounded-md hover:bg-[#2c25f1] text-[12px] duration-200' href="https://documenter.getpostman.com/view/21857409/2s93z9c2zB" target='_blank'>Dokumentasi</a>
             </div>
         </motion.div>
     )
