@@ -5,14 +5,14 @@ import Cookies from 'js-cookie'
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) {
-            navigate('/home')
-        }
-    }, [])
+    // useEffect(() => {
+    //     const token = Cookies.get('token');
+    //     if (token) {
+    //         navigate('/home')
+    //     }
+    // }, [])
 
 
     return (
